@@ -42,13 +42,13 @@ int main (int argc, char **argv) {
 		int w;
 
 		generate_board_from_file(board, argv[1], words, ptr_wll);
-		
+
 		FILE *output_fp;
 
-	   	output_fp = fopen("output.txt", "w");
+	   	output_fp = fopen("result.txt", "w");
 
 		for (w=0; w < word_list_len; w++) {
-			result = word_checker(board, dictionary, submitted_words, 
+			result = word_checker(board, dictionary, submitted_words,
 									words[w]);
 			if ((w < word_list_len - 1) && (result == 0)) {
 				fprintf(output_fp, "%s,", words[w]);
@@ -58,12 +58,12 @@ int main (int argc, char **argv) {
 				score += score_word(words[w]);
 			}
 		}
-		
+
 		fprintf(output_fp, "\n");
 		fprintf(output_fp, "%d", score);
 
 	   	fclose(output_fp);
-		
+
 		for (int i=0; i < MAX_NUM_WORDS; i++) {
 			free(words[i]);
 		}
@@ -88,9 +88,9 @@ int main (int argc, char **argv) {
 
     free(board);
 	free_dictionary(dictionary, BIG_HASH_SIZE);
-	
+
 	UserNode *curr = head;
-	
+
 	while ((curr = head) != NULL) {
 		head = head->next;
 		free(curr);
